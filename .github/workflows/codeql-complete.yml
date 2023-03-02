@@ -28,13 +28,12 @@ jobs:
       with:
         python-version: '3.9' # The version of Python to use
         cache: 'pip' # The package manager to use 
-        cache-dependency-path: '**/requirements.txt' # The path to requirements.txt file to find dependancies to cache
-
-    - name: Install Python dependencies
+  
+    - name: Setup CODEQL_PYTHON environment variable 
       run: |
-       pip install -r path/to/requirements.txt
+       echo "CODEQL_PYTHON=$(which python)" >> $GITHUB_ENV
       working-directory: . # Change this to the path to your project if its a monorepo
-
+      
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
